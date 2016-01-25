@@ -7,20 +7,56 @@ Vehicule est la classe mère ou super-classe
 package epfc.cours3449;
 
 public class Vehicule {
-    public int age;
+
+    private int age;    // en jour
 
     public void start() {
-        System.out.println("Véhicule " + age + " start");
+        System.out.println("Véhicule " + getAge() + " start");
     }
-    
+
     public void stop() {
-        System.out.println("Véhicule " + age + " stop");
+        System.out.println("Véhicule " + getAge() + " stop");
+    }
+
+    /**
+     * @return the age en année
+     */
+    public int getAge() {
+        return age/365;
+    }
+
+    /**
+     * @param age the age to set en année
+     */
+    public void setAge(int age) {
+        if (age >= 0 && age <= 5000) {
+            this.age = age*365;
+        }
     }
     
-    public static void main(String[] args) {
-        Vehicule v = new Vehicule();
-        v.age = 3;
-        v.start();
-        v.stop();
+    public int getAge(int unite) {
+        switch(unite) {
+            case 0: // en jour
+                return age;
+            case 1: // en année
+                getAge();
+            default:
+                System.err.println("Valeur de code hors limite: " + unite);
+        }
+        return age;
+    }
+    
+    public void setAge(int age, int unite) {
+        switch(unite) {
+            case 0: // en jour
+                // "bug" : permet d'introduire un age non conforme (<0 ou > 5000 ans)
+                this.age = age;
+                break;
+            case 1: // en année
+                setAge(age);
+                break;
+            default:
+                System.err.println("Valeur de code hors limite: " + unite);
+        }        
     }
 }
