@@ -10,13 +10,13 @@ public class Voiture extends Vehicule {
         Voiture v = new Voiture();
         v.consommation = 4.5;
         v.couleur = "vert";
-        v.age = 15;
+        v.setAge(15);
         v.start();
         v.stop();
     }
     @Override
     public void start() {
-        System.out.println("Voiture " + age + " " + couleur + " "
+        System.out.println("Voiture " + this.getAge() + " " + couleur + " "
          + consommation + " start");
     }
 }
