@@ -20,7 +20,8 @@ public class GestionLivres_VersioDeBase {
             l.setPlace(keyb.nextLine());
             System.out.print("Data d'achat: ");
             l.setDateAchat(keyb.nextLine());
-            System.out.print("\"N\" stoppe l'encodage, autre caractère continue: ");
+            System.out.print("\"N\" stoppe l'encodage, "
+                    + "autre caractère continue: ");
             if( "N".equals(keyb.nextLine()) ) break;
         } while (true);
         

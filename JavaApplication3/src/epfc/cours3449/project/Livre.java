@@ -41,6 +41,7 @@ public class Livre {
 
     @Override
     public String toString() {
-        return "Livre{" + "identifiant=" + identifiant + ", place=" + place + ", dateAchat=" + dateAchat + '}';
+        return "Livre{" + "identifiant=" + identifiant + ", place=" 
+                + place + ", dateAchat=" + dateAchat + '}';
     }    
 }
