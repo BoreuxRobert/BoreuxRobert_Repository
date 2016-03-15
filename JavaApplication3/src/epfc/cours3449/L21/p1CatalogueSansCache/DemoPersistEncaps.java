@@ -1,5 +1,5 @@
 
-package epfc.cours3449.L20;
+package epfc.cours3449.L21.p1CatalogueSansCache;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,8 +10,7 @@ public class DemoPersistEncaps {
     static Catalogue cat;
     static final String nomDeFichier = "livre.csv";
 
-    public static void main(String[] args) throws FileNotFoundException, 
-            IOException, Exception {
+    public static void main(String[] args) throws FileNotFoundException, IOException, Exception {
         cat = new Catalogue(nomDeFichier);
         creeDeuxLivres();
         testDeleteNoLivre();        
@@ -20,8 +19,7 @@ public class DemoPersistEncaps {
     }
 
     private static void TestReadByAuteur() {
-        System.out.println("\n\n--------------------------------------"
-                + "-------------------------");
+        System.out.println("\n\n---------------------------------------------------------------");
         ArrayList<Livre> livresDeVictor = cat.readByAuteur("Victor");
         for (Livre livre : livresDeVictor) {
             System.out.println(livre.toString());
@@ -44,10 +42,10 @@ public class DemoPersistEncaps {
         }
     }
 
-    private static void creeDeuxLivres() throws FileNotFoundException {
+    private static void creeDeuxLivres() throws FileNotFoundException, IOException {
         Livre l1 = new Livre("Notre Dame", "Victor");
         cat.add(l1);
-        Livre l2 = new Livre("Java ...", "Orstmann");
+        Livre l2 = new Livre("Java ...", "Horstmann");
         cat.add(l2);
     }
 }

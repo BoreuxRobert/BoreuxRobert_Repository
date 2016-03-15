@@ -1,5 +1,5 @@
 
-package epfc.cours3449.L20;
+package epfc.cours3449.L21.p1CatalogueSansCache;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,19 +10,21 @@ import java.util.Scanner;
 
 public class Catalogue {
 
-    private ArrayList<Livre> ls = new ArrayList<>();
+//éliminer la cache:    private ArrayList<Livre> ls = new ArrayList<>();
     private String nomDeFichier;
+    private Iterable<Livre> ls;
 
-    public Catalogue(String nomDeFichier) throws FileNotFoundException, 
-            IOException {this.nomDeFichier = nomDeFichier;
-            charge();
+    public Catalogue(String nomDeFichier) throws FileNotFoundException, IOException {
+        this.nomDeFichier = nomDeFichier;
+//ne pas charger à la création        charge();
     }
 
-    public void add(Livre l) {
+    public void add(Livre l) throws IOException {
+        ArrayList<Livre> ls = charge();
         // crée un clone profond (qui élimine toute référence à "l")
-        String titre = new String(l.getTitre());
-        String auteur = new String(l.getAuteur());
-        Livre copy = new Livre(titre, auteur);
+//pas nécessaire String sont immuables        String titre = new String(l.getTitre());
+//pas nécessaire String sont immuables        String auteur = new String(l.getAuteur());
+        Livre copy = new Livre(l.getTitre(), l.getAuteur());
         ls.add(copy);
         /*ls.add(new Livre(
                 new String(l.getTitre()),
@@ -43,6 +45,7 @@ public class Catalogue {
     }
 
     public void delete(int id) throws Exception {
+        ArrayList<Livre> ls = charge();
         for (Livre livre : ls) {
             if (livre.getId() == id) {
                 ls.remove(livre);
@@ -63,7 +66,7 @@ public class Catalogue {
     }
 
     ArrayList<Livre> read() {
-        return ls;
+        return (ArrayList<Livre>) ls;
     }
 
     ArrayList<Livre> readByAuteur(String auteur) {
@@ -76,7 +79,8 @@ public class Catalogue {
         return lsDeAuteur;
     }
 
-    private void charge() throws FileNotFoundException, IOException {
+    private ArrayList<Livre> charge() throws FileNotFoundException, IOException {
+        ArrayList<Livre> ls1 = new ArrayList<>();
         File file = new File(nomDeFichier);
         if (!file.exists()) {
             file.createNewFile();
@@ -87,8 +91,9 @@ public class Catalogue {
             String[] elements = line.split(";");
             int id = Integer.getInteger(elements[0]);
             Livre l = new Livre( id, elements[1], elements[2]);
-            ls.add(l);
+            ls1.add(l);
         }
+        return ls1;
     }
 
     private void sauve() {
@@ -103,7 +108,7 @@ public class Catalogue {
         } catch (FileNotFoundException ex) {
             System.out.println("Exception " + ex);
         } finally {
-           //pw.close();
+            pw.close();
         }
     }
 }
